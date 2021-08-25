@@ -16,8 +16,9 @@ class Calculator {
     }
 
     appendNumber(number) {
-        if (number === '.' && this.currentOperand.includes('.')) return
-        this.currentOperand = this.currentOperand.toString() + number.toString()
+        if (number === '.' && (this.currentOperand === '' || this.currentOperand.includes('.'))) return
+        this.currentOperand = this.operation === "=" ? number.toString() : this.currentOperand + number.toString()
+        if(this.operation === "=") this.operation = undefined
     }
 
     chooseOperation(operation) {
@@ -52,7 +53,7 @@ class Calculator {
                 return
         }
         this.currentOperand = computation
-        this.operation = undefined
+        this.operation = "="
         this.previousOperand = ''
     }
 
